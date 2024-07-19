@@ -73,3 +73,5 @@ document.addEventListener('DOMContentLoaded', function() {
     stopSlideshow(); // Stop auto slideshow when manually navigating
   });
 });
+
+
