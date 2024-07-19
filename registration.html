@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .service-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .selected-service {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+        .selected-service span {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="card p-4 shadow-lg">
+            <h2 class="card-title text-center">Parlour Booking Form</h2>
+            <form id="registrationForm">
+                <div class="form-group">
+                    <label for="fullName">Full Name</label>
+                    <input type="text" class="form-control" id="fullName" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" class="form-control" id="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="serviceCategory">Search a Service Category</label>
+                    <select class="form-control" id="serviceCategory" onchange="updateServiceOptions()" required>
+                        <option value="" disabled selected>Select a category</option>
+                        <option value="hair">Hair</option>
+                        <option value="body">Body</option>
+                        <option value="nails">Nails</option>
+                        <option value="makeup">Makeup</option>
+                        <option value="face">Face</option>
+                    </select>
+                </div>
+                <div id="serviceList"></div>
+                <div id="selectedServices" class="mb-3">
+                    <h4>Selected Services:</h4>
+                    <ul id="selectedServicesList"></ul>
+                </div>
+                <div class="form-group">
+                    <label for="appointmentDate">Preferred Appointment Date</label>
+                    <input type="date" class="form-control" id="appointmentDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="appointmentTime">Preferred Appointment Time</label>
+                    <input type="time" class="form-control" id="appointmentTime" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Submit</button>
+            </form>
+            <div id="successMessage" class="alert alert-success mt-3 d-none">Registration Successful!</div>
+            <!-- Price Chart -->
+            <div class="mt-4">
+                <h3 class="text-center">Price Chart</h3>
+                <table class="table table-bordered">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Service</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Haircut</td>
+                            <td>$20</td>
+                        </tr>
+                        <tr>
+                            <td>Manicure</td>
+                            <td>$25</td>
+                        </tr>
+                        <tr>
+                            <td>Pedicure</td>
+                            <td>$30</td>
+                        </tr>
+                        <tr>
+                            <td>Facial</td>
+                            <td>$40</td>
+                        </tr>
+                        <tr>
+                            <td>Massage</td>
+                            <td>$50</td>
+                        </tr>
+                        <!-- Add more services as needed -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var services = {
+            "Haircut": 20,
+            "Manicure": 25,
+            "Pedicure": 30,
+            "Facial": 40,
+            "Massage": 50
+            // Add more services with prices as needed
+        };
+
+        var selectedServices = []; // Array to store selected services
+
+        // Function to update service options based on selected category
+        function updateServiceOptions() {
+            var category = document.getElementById("serviceCategory").value;
+            var serviceList = document.getElementById("serviceList");
+
+            // Clear existing service list
+            serviceList.innerHTML = "";
+
+            // Populate services based on selected category
+            switch(category) {
+                case "hair":
+                    addServiceOption("Haircut");
+                    addServiceOption("Colouring");
+                    addServiceOption("Straightening");
+                    break;
+                case "body":
+                    addServiceOption("Massage");
+                    addServiceOption("Waxing");
+                    addServiceOption("Body Scrub");
+                    break;
+                case "nails":
+                    addServiceOption("Manicure");
+                    addServiceOption("Pedicure");
+                    addServiceOption("Nail Art");
+                    break;
+                case "makeup":
+                    addServiceOption("Bridal Makeup");
+                    addServiceOption("Party Makeup");
+                    addServiceOption("Airbrush Makeup");
+                    break;
+                case "face":
+                    addServiceOption("Facial");
+                    addServiceOption("Peel");
+                    addServiceOption("Face Massage");
+                    break;
+                default:
+                    // Handle default case
+                    break;
+            }
+        }
+
+        // Function to add service option with a "+" button
+        function addServiceOption(serviceName) {
+            var serviceItem = document.createElement("div");
+            serviceItem.className = "service-item";
+
+            var serviceLabel = document.createElement("span");
+            serviceLabel.textContent = serviceName;
+            serviceItem.appendChild(serviceLabel);
+
+            var addButton = document.createElement("button");
+            addButton.textContent = "+";
+            addButton.className = "btn btn-sm btn-primary";
+            addButton.onclick = function() {
+                addSelectedService(serviceName);
+                serviceItem.style.display = "none"; // Hide the service item after adding
+            };
+            serviceItem.appendChild(addButton);
+
+            document.getElementById("serviceList").appendChild(serviceItem);
+        }
+
+        // Function to add selected service to the list
+        function addSelectedService(serviceName) {
+            selectedServices.push(serviceName);
+            updateSelectedServicesList();
+        }
+
+        // Function to update the selected services list
+        function updateSelectedServicesList() {
+            var selectedServicesList = document.getElementById("selectedServicesList");
+            selectedServicesList.innerHTML = "";
+
+            selectedServices.forEach(function(service) {
+                var li = document.createElement("li");
+                li.className = "selected-service";
+                var spanServiceName = document.createElement("span");
+                spanServiceName.textContent = service;
+                li.appendChild(spanServiceName);
+
+                var spanPrice = document.createElement("span");
+                spanPrice.textContent = "$" + services[service]; // Retrieve price from services object
+                li.appendChild(spanPrice);
+
+                selectedServicesList.appendChild(li);
+            });
+        }
+
+        // Function to submit the registration form
+        document.getElementById("registrationForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            // Additional logic to handle form submission, e.g., sending data to server
+            var fullName = document.getElementById("fullName").value;
+            var email = document.getElementById("email").value;
+            var phone = document.getElementById("phone").value;
+            var appointmentDate = document.getElementById("appointmentDate").value;
+            var appointmentTime = document.getElementById("appointmentTime").value;
+
+            // Example: Sending data to server
+            console.log("Full Name:", fullName);
+            console.log("Email:", email);
+            console.log("Phone Number:", phone);
+            console.log("Selected Services:", selectedServices);
+            console.log("Preferred Appointment Date:", appointmentDate);
+            console.log("Preferred Appointment Time:", appointmentTime);
+
+            // Display success message
+            var successMessage = document.getElementById("successMessage");
+            successMessage.classList.remove("d-none");
+
+            // Clear form and selected services list (if needed)
+            // document.getElementById("registrationForm").reset();
+            // selectedServices = [];
+            // updateSelectedServicesList();
+        });
+    </script>
+</body>
+</html>
