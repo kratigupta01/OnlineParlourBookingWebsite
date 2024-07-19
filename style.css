@@ -160,6 +160,7 @@ nav {
 
 /* About Section */
 #about {
+  
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
   margin-top: 5px;
   display: flex;
@@ -240,6 +241,7 @@ nav {
 }
 /* Services Section */
 #services {
+  
   margin-top: 5px;
     background-color: #ffe6e6;
     padding: 50px;
@@ -307,33 +309,35 @@ nav {
   }
 }
 
-
 /* package section */
 /* Increase the size of the checkboxes and change their color */
 .package-block input[type="checkbox"] {
-  transform: scale(2); /* Increase the size */
+  transform: scale(1.5); /* Increase the size */
   margin-right: 10px; /* Add some spacing between checkbox and text */
-  color: #3a12b3dc;/* color: #ff0000; Change the color of the checkbox */
+  /* appearance: none; Remove default checkbox styling */
+  width: 20px;
+  height: 20px;
+  border: 2px solid #b31212dc; /* Default border color for unchecked state */
+  border-radius: 4px; /* Add rounded corners */
+  background-color: #fff; /* Default background color */
+  cursor: pointer;
 }
 
 /* Style the checked checkboxes */
-.package-block input[type="checkbox"]:checked::before {
-  /* Unicode for checkmark symbol */
-  display: inline-block;
-  width: 1em;
-  font-size: 2em; /* Increase checkmark size */
-  text-align: center;
-  color: #12b322dc;
+.package-block input[type="checkbox"]:checked {
+  background-color: #12b322dc; /* Change background color when checked */
+  border-color: #12b322dc; /* Change border color when checked */
 }
-
-/* Style the unchecked checkboxes */
 
 /* Apply line-through effect to the text of unchecked checkboxes */
 .package-block input[type="checkbox"]:not(:checked) + span {
   color: #b31212dc; /* Change color to lighter gray */
   text-decoration: line-through; /* Add line-through effect */
 }
+
+/* Other styling for the package section */
 #packages {
+  
   margin-top: 5px;
   padding: 50px;
   text-align: center;
@@ -397,11 +401,6 @@ nav {
   transition: all 0.3s ease;
 }
 
-/* .text-container li:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 0 20px rgba(223, 208, 208, 0.4);
-} */
-
 .text-container li span {
   font-weight: bold;
   color: #1d1f0f;
@@ -410,32 +409,21 @@ nav {
 .stylish-heading {
   font-family: "Great Vibes", cursive;
   font-size: 40px;
-  background-color: #b23d6c;/* Semi-transparent background color */
+  background-color: #b23d6c; /* Semi-transparent background color */
   backdrop-filter: blur(50px); /* Apply blur effect */
   -webkit-backdrop-filter: blur(50px); /* Safari support */
   padding: 5px; /* Add padding inside the h2 */
   text-align: center; /* Center text inside the h2 */
   border-radius: 10px; /* Optional: Add rounded corners */
   color: rgb(255, 253, 253);
-  margin-bottom: 20px;   /* Add animation for a glowing effect */
+  margin-bottom: 20px; /* Add animation for a glowing effect */
 }
 
-/* @keyframes glow {
-  from {
-      text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.8);
-  }
-  to {
-      text-shadow: 2px 2px 10px rgba(255, 255, 255, 0.8);
-  }
-} */
-
 .bridal-package {
-  /* background-color: #cd81bb; */
   background-color: #f98484d5;
 }
 
 .engagement-package {
-  /* background-color: #dc6f97d5; */
   background-color: #cd81bb;
 }
 
@@ -446,7 +434,6 @@ nav {
   left: 0;
   width: 100%;
   height: 100%;
-  /* background-color: rgb(49, 26, 222); */
   border-radius: 10px;
   transform: scale(0);
   transition: all 0.3s ease;
@@ -485,6 +472,7 @@ body {
 }
 
 #gallery {
+  
   padding: 50px ;
   text-align: center;
   background-color: #ffe6e6;
@@ -610,6 +598,37 @@ body {
   color: rgb(255, 253, 253);
   margin-bottom: 20px;  
 }
+
+.map-photo-container {
+  display: flex;
+  justify-content: center; /* Center the items horizontally */
+  max-width: 800px; /* Adjust the maximum width of the container */
+  margin: 0 auto;
+}
+
+.map-photo-container > div {
+  flex: 1;
+  margin: 20px;
+  padding: 10px;
+  background-color: #f5e7f4;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.map-photo {
+  width: 100%; /* Adjusted to fit within the container */
+  height: auto;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.3s;
+  display: block;
+}
+
+
+.map-photo:hover {
+  transform: scale(1.05);
+}
+
 
 .contact-container {
   display: flex;
