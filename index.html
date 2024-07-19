@@ -5,6 +5,35 @@
         html {
             scroll-behavior: smooth;
         }
+        #registrationModal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        #modalContent {
+          box-sizing: border-box;
+          background-color: white;
+          margin: 5% auto;
+          padding: 10px;
+          border: 1px solid #888;
+          width: 80%;
+          height: 100%;
+          /* max-width: 800px; */
+          max-height: 90%; /* Adjusted maximum height */
+          /* overflow-y: auto; */
+        }
+        iframe {
+            width: 100%;
+            height: 100%; 
+            border: none;
+            /* box-sizing: border-box; */
+        }
     </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,7 +46,7 @@
     <header>
         <nav>
             <div class="logo">
-                <img src="https://th.bing.com/th/id/OIP.GH_zsz17QSt_gKZpdi-6ZgAAAA?rs=1&pid=ImgDetMain" alt="Logo" style="height: 60px;">
+                <img src="logo.jpg" alt="Logo" style="height: 60px;">
             </div>
             <ul class="navbar">
                 <li><a href="#home">Home</a></li>
@@ -30,22 +59,49 @@
         </nav>
     </header>
     
-
     <!-- Hero Section -->
     <section id="home">
         <div class="hero-container">
             <h1>Welcome to Kumkum Beauty Parlour</h1>
             <p>Experience the art of beauty with us</p>
-            <button class="animated-button">Schedule Your Time</button>
+            <button id="scheduleButton" class="animated-button">Schedule Your Time</button>
         </div>
     </section>
+
+    <!-- Registration Modal -->
+    <div id="registrationModal">
+        <div id="modalContent">
+            <iframe id="registrationIframe"></iframe>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#scheduleButton").click(function() {
+                $("#registrationIframe").attr("src", "registration.html");
+                $("#registrationModal").fadeIn();
+                $("body").css("overflow", "hidden");
+
+            });
+
+            // Close the modal when clicking outside of the content
+            $(window).click(function(event) {
+                if (event.target.id == "registrationModal") {
+                    $("#registrationModal").fadeOut();
+                    $("body").css("overflow", "auto");
+                }
+            });
+        });
+    </script>
+
 
     <!-- About Section -->
     
     <section id="about">
         <div class="about-container">
             <div class="image">
-                <img src="https://th.bing.com/th/id/OIP._mbUm7fx9kxprhd16l2fbgHaFp?rs=1&pid=ImgDetMain" alt="About Image">
+                <img src="about.jpg" alt="About Image">
             </div>
             <div class="text">
                 <h2>About Us</h2>
@@ -62,49 +118,49 @@
         <h2 class="services-heading">Our Services</h2>
         <div class="service-grid">
           <div class="service">
-            <img src="https://th.bing.com/th/id/OIP.LYG3JOfVO5o8_SK6hlZr4QHaE8?rs=1&pid=ImgDetMain" alt="Threading">
+            <img src="threading.jpg" alt="Threading">
             <h3>Threading</h3>
             <p>Get perfectly shaped eyebrows with our expert threading services</p>
             <span class="price">Rs.30</span>
           </div>
           <div class="service">
-            <img src="https://th.bing.com/th/id/OIP.aKPCCxmRSup2qt08Fi3dlQHaE8?rs=1&pid=ImgDetMain" alt="Hair Cutting">
+            <img src="cutting.jpg" alt="Hair Cutting">
             <h3>Hair Cutting</h3>
             <p>Transform your look with our precision hair cutting services</p>
             <span class="price">Rs.100 - Rs.500</span>
           </div>
           <div class="service">
-            <img src="https://static.independent.co.uk/s3fs-public/thumbnails/image/2020/04/15/14/home-waxing.jpg" alt="Waxing">
+            <img src="WAXING..jpg" alt="Waxing">
             <h3>Waxing</h3>
             <p>Smooth and silky skin with our waxing services for women</p>
             <span class="price">Rs.50 - Rs.500</span>
           </div>
           <div class="service">
-            <img src="https://th.bing.com/th/id/OIP.N840h1tKprqCc-1h1SDPjAHaE8?rs=1&pid=ImgDetMain" alt="Manicure">
+            <img src="manicure.jpg" alt="Manicure">
             <h3>Manicure</h3>
             <p>Get pampered with our luxurious manicure services</p>
             <span class="price">Rs.200</span>
           </div>
           <div class="service">
-            <img src="https://th.bing.com/th/id/OIP.gOXu2t-i3FJeSbZ5TohVbQHaFj?rs=1&pid=ImgDetMain" alt="Pedicure">
+            <img src="padicure.jpg" alt="Pedicure">
             <h3>Pedicure</h3>
             <p>Relax and rejuvenate with our indulgent pedicure services</p>
             <span class="price">Rs.200</span>
           </div>
           <div class="service">
-            <img src="https://1.bp.blogspot.com/-R6k59U6sxTw/XeDCa5UJE5I/AAAAAAAAAXA/C3UKCx6IShgAVira5Cq23Uzh3XdWqOvfACLcBGAsYHQ/s1600/indian%2Bbridal%2Bmakeup%2Bimages%2Band%2Blooks%2B%252819%2529.jpg" alt="Makeup">
+            <img src="makeup.jpg" alt="Makeup">
             <h3>Makeup</h3>
             <p>Professional makeup services for all occasions</p>
             <span class="price">Rs.500 - Rs.2000</span>
           </div>
           <div class="service">
-            <img src="https://th.bing.com/th/id/R.d2b93f8bd24f06f6cddf6345e1628731?rik=adrpsRpz9Z1pTg&riu=http%3a%2f%2fwww.oasismassageandspa.com%2fwp-content%2fuploads%2f2017%2f11%2fspa_facial_face.jpg&ehk=mL3IokoxTXc5rXqQlYnaperwUZwAm56RRwEVyqYE7lE%3d&risl=&pid=ImgRaw&r=0" alt="Facial">
+            <img src="facial.jpg" alt="Facial">
             <h3>Facial</h3>
             <p>Refreshing and rejuvenating facial treatments</p>
             <span class="price">Rs.300 - Rs.1500</span>
           </div>
           <div class="service">
-            <img src="https://cdn0.weddingwire.in/articles/images/3/0/0/2/img_22003/south-indian-bridal-hairstyles-for-engagement-prerna-khullar-side-braid-and-puff-with-a-curled-hair-tie.jpg" alt="Hairstyle">
+            <img src="hairstyle.jpg" alt="Hairstyle">
             <h3>Hairstyle</h3>
             <p>Elegant and trendy hairstyles for any event</p>
             <span class="price">Rs.400 - Rs.1500</span>
@@ -184,6 +240,13 @@
 
 <section id="contact">
   <h2>Contact Us</h2>
+  <div class="map-photo-container">
+    <div><a href="https://maps.app.goo.gl/j4xftGDg5DFjdzny7" target="_blank">
+      <img src="map.jpeg" alt="Map Photo" class="map-photo">
+    </a></div>
+    
+  </div>
+
   <div class="contact-container">
     <div class="contact-info">
       <h3>Contact</h3>
@@ -194,15 +257,11 @@
         <a href="https://www.facebook.com/gracebeautyparlour.fb" target="_blank" class="social-icon si-facebook">
           <i class="fab fa-facebook-f"></i>
         </a>
-        <!-- <a href="https://in.pinterest.com/makeup_artist_rashmi" target="_blank" class="social-icon si-pinterest">
-          <i class="fab fa-pinterest-p"></i>
-        </a> -->
+        
         <a href="https://www.instagram.com/" target="_blank" class="social-icon si-instagram">
           <i class="fab fa-instagram"></i>
         </a>
-        <!-- <a href="https://www.youtube.com/channel/UCECl64jfwxSombrEGnUUp0w" target="_blank" class="social-icon si-youtube">
-          <i class="fab fa-youtube"></i>
-        </a> -->
+        
       </div>
     </div>
     <div class="address-info">
